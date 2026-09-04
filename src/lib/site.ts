@@ -119,6 +119,10 @@ export type Project = {
   category: string;
   description: string;
   image?: string | undefined;
+  /** Print/mockup da versão desktop */
+  previewDesktop?: string | undefined;
+  /** Print/mockup da versão mobile */
+  previewMobile?: string | undefined;
   videoUrl?: string | undefined;
   liveUrl?: string | undefined;
   highlights: string[];
@@ -130,10 +134,12 @@ export const projects: Project[] = [
   {
     slug: "creative-hair",
     name: "Creative Hair",
-    category: "Website · Beleza",
+    category: "Website • Beleza",
     description:
-      "Website desenvolvido para apresentar produtos, serviços e fortalecer a presença digital da marca.",
+      "Um website moderno e personalizado desenvolvido para fortalecer a presença digital da marca e apresentar seus produtos e serviços.",
     image: creativeHairImage,
+    previewDesktop: creativeHairImage, // troque pelo print real do desktop
+    previewMobile: undefined, // adicione o print da versão mobile
     videoUrl: undefined, // adicione o link do vídeo demonstrativo
     liveUrl: undefined, // adicione o link do projeto no ar
     highlights: [
@@ -147,11 +153,32 @@ export const projects: Project[] = [
 
 export type Testimonial = {
   name: string;
+  /** Projeto ou serviço relacionado */
   role: string;
   quote?: string | undefined;
+  /** Foto da cliente ou print do feedback recebido */
+  image?: string | undefined;
 };
 
-/** Somente depoimentos reais. Cards sem texto ficam como "em breve". */
+/** Somente depoimentos reais — adicione novos feedbacks aqui. */
 export const testimonials: Testimonial[] = [
-  { name: "Creative Hair", role: "Cliente · Website", quote: undefined },
+  { name: "Creative Hair", role: "Website • Beleza", quote: undefined, image: undefined },
 ];
+
+/** Frase de destaque e serviços listados no topo do site. */
+export const heroTagline = "Soluções digitais para empresas, empreendedores e profissionais.";
+
+export const heroServices = [
+  "Sites profissionais",
+  "Landing Pages",
+  "Inteligência Artificial",
+  "Automação",
+  "Soluções para WhatsApp",
+];
+
+export const trustPoints = [
+  "Atendimento personalizado",
+  "Soluções desenvolvidas para sua necessidade",
+  "Tecnologia para ajudar seu negócio a crescer",
+];
+
