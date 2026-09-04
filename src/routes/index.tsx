@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { Hero } from "@/components/sections/Hero";
 import {
   About,
@@ -12,6 +13,7 @@ import {
   Process,
   Services,
   Testimonials,
+  Trust,
 } from "@/components/sections/Sections";
 
 const title = "LPweb.dev — Sites profissionais, IA e automação para seu negócio";
@@ -68,10 +70,12 @@ function Index() {
         <Process />
         <Benefits />
         <Testimonials />
+        <Trust />
         <FinalCta />
         <Contact />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }

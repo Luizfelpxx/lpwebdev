@@ -10,7 +10,9 @@ import {
   projects,
   services,
   testimonials,
+  trustPoints,
   whatsappUrl,
+
 } from "@/lib/site";
 
 function SectionHeading({
@@ -121,7 +123,129 @@ export function Audience() {
   );
 }
 
+function ProjectCase({ project }: { project: (typeof projects)[number] }) {
+  return (
+    <article className="card-premium overflow-hidden">
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-secondary/40 sm:aspect-[16/9]">
+        {project.videoUrl ? (
+          <video
+            src={project.videoUrl}
+            poster={project.image}
+            controls
+            playsInline
+            className="h-full w-full object-cover"
+          />
+        ) : project.image ? (
+          <img
+            src={project.image}
+            alt={`Projeto ${project.name} desenvolvido pela LPweb.dev`}
+            loading="lazy"
+            width={1280}
+            height={800}
+            className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+          />
+        ) : (
+          <div className="grid h-full place-items-center text-sm text-muted-foreground">
+            Imagem do projeto em breve
+          </div>
+        )}
+        <span className="absolute top-4 left-4 rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-semibold backdrop-blur">
+          {project.category}
+        </span>
+      </div>
+
+      <div className="p-6 sm:p-8">
+        <h3 className="font-display text-2xl font-bold sm:text-3xl">{project.name}</h3>
+        <p className="mt-3 max-w-2xl text-[0.95rem] leading-relaxed text-muted-foreground">
+          {project.description}
+        </p>
+
+        {project.highlights.length > 0 && (
+          <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
+            {project.highlights.map((h) => (
+              <li key={h} className="flex items-start gap-2.5 text-sm">
+                <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-primary/15 text-primary-glow">
+                  <Check className="size-3" aria-hidden />
+                </span>
+                <span className="min-w-0 text-muted-foreground">{h}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="mt-7 grid gap-3">
+          {(project.previewDesktop || project.previewMobile) && (
+            <div className="grid gap-3 sm:grid-cols-[1.6fr_1fr]">
+              <figure className="overflow-hidden rounded-2xl border border-border bg-secondary/30">
+                <div className="border-b border-border px-4 py-2 text-xs text-muted-foreground">
+                  Preview desktop
+                </div>
+                {project.previewDesktop ? (
+                  <img
+                    src={project.previewDesktop}
+                    alt={`Versão desktop do site ${project.name}`}
+                    loading="lazy"
+                    className="aspect-[16/10] w-full object-cover"
+                  />
+                ) : (
+                  <div className="grid aspect-[16/10] place-items-center text-xs text-muted-foreground">
+                    Em breve
+                  </div>
+                )}
+              </figure>
+              <figure className="overflow-hidden rounded-2xl border border-border bg-secondary/30">
+                <div className="border-b border-border px-4 py-2 text-xs text-muted-foreground">
+                  Preview mobile
+                </div>
+                {project.previewMobile ? (
+                  <img
+                    src={project.previewMobile}
+                    alt={`Versão mobile do site ${project.name}`}
+                    loading="lazy"
+                    className="aspect-[9/14] w-full object-cover"
+                  />
+                ) : (
+                  <div className="grid aspect-[9/14] place-items-center text-xs text-muted-foreground">
+                    Em breve
+                  </div>
+                )}
+              </figure>
+            </div>
+          )}
+        </div>
+
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          {project.liveUrl && (
+            <CTALink
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="primary"
+              size="lg"
+              className="w-full sm:w-auto"
+            >
+              Visitar projeto
+              <ArrowRight className="size-4" aria-hidden />
+            </CTALink>
+          )}
+          <Link
+            to="/portfolio/$slug"
+            params={{ slug: project.slug }}
+            className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-full border border-border bg-surface/40 px-8 text-base font-semibold transition-all hover:-translate-y-0.5 hover:border-primary/60 sm:w-auto"
+          >
+            Ver detalhes do projeto
+            <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export function Portfolio() {
+  const featured = projects.filter((p) => p.featured);
+  const others = projects.filter((p) => !p.featured);
+
   return (
     <section id="portfolio" className="section-y bg-surface/25">
       <div className="mx-auto max-w-6xl px-5">
@@ -133,55 +257,60 @@ export function Portfolio() {
           />
         </Reveal>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {projects.map((project, i) => (
-            <Reveal
-              key={project.slug}
-              delay={i * 90}
-              className={project.featured ? "md:col-span-2" : undefined}
-            >
-              <article className="card-premium h-full overflow-hidden">
-                <div className="aspect-[16/10] w-full overflow-hidden bg-secondary/40">
-                  {project.image ? (
-                    <img
-                      src={project.image}
-                      alt={`Projeto ${project.name} desenvolvido pela LPweb.dev`}
-                      loading="lazy"
-                      width={1280}
-                      height={800}
-                      className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
-                    />
-                  ) : (
-                    <div className="grid h-full place-items-center text-sm text-muted-foreground">
-                      Imagem do projeto em breve
-                    </div>
-                  )}
-                </div>
-                <div className="p-6">
-                  <p className="text-xs tracking-wide text-primary-glow uppercase">
-                    {project.category}
-                  </p>
-                  <h3 className="mt-2 font-display text-xl font-semibold">{project.name}</h3>
-                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                    {project.description}
-                  </p>
-                  <Link
-                    to="/portfolio/$slug"
-                    params={{ slug: project.slug }}
-                    className="mt-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface/40 px-5 py-2.5 text-sm font-semibold transition-all hover:-translate-y-0.5 hover:border-primary/60"
-                  >
-                    Conhecer o projeto
-                    <ArrowRight className="size-4" aria-hidden />
-                  </Link>
-                </div>
-              </article>
+        <div className="mt-12 space-y-8">
+          {featured.map((project, i) => (
+            <Reveal key={project.slug} delay={i * 90}>
+              <ProjectCase project={project} />
             </Reveal>
           ))}
         </div>
+
+        {others.length > 0 && (
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {others.map((project, i) => (
+              <Reveal key={project.slug} delay={i * 90}>
+                <article className="card-premium h-full overflow-hidden">
+                  <div className="aspect-[16/10] w-full overflow-hidden bg-secondary/40">
+                    {project.image ? (
+                      <img
+                        src={project.image}
+                        alt={`Projeto ${project.name} desenvolvido pela LPweb.dev`}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+                      />
+                    ) : (
+                      <div className="grid h-full place-items-center text-sm text-muted-foreground">
+                        Imagem do projeto em breve
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-6">
+                    <p className="text-xs tracking-wide text-primary-glow uppercase">
+                      {project.category}
+                    </p>
+                    <h3 className="mt-2 font-display text-xl font-semibold">{project.name}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {project.description}
+                    </p>
+                    <Link
+                      to="/portfolio/$slug"
+                      params={{ slug: project.slug }}
+                      className="mt-5 inline-flex h-12 items-center gap-2 rounded-full border border-border bg-surface/40 px-6 text-sm font-semibold transition-all hover:-translate-y-0.5 hover:border-primary/60"
+                    >
+                      Ver detalhes do projeto
+                      <ArrowRight className="size-4" aria-hidden />
+                    </Link>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
 }
+
 
 export function Process() {
   return (
@@ -247,24 +376,68 @@ export function Testimonials() {
     <section className="section-y">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal>
-          <SectionHeading eyebrow="Feedback" title="Resultados que geram confiança." />
+          <SectionHeading
+            eyebrow="Feedback"
+            title="Resultados que geram confiança."
+            text="Depoimentos reais de quem já trabalhou com a LPweb.dev."
+          />
         </Reveal>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-4xl gap-5 sm:grid-cols-2">
           {testimonials.map((item, i) => (
             <Reveal key={item.name} delay={i * 80}>
-              <figure className="card-premium h-full p-6">
-                <Quote className="size-6 text-primary-glow" aria-hidden />
-                <blockquote className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  {item.quote ?? "Depoimento em breve."}
-                </blockquote>
-                <figcaption className="mt-5 border-t border-border pt-4">
-                  <p className="text-sm font-semibold">{item.name}</p>
-                  <p className="text-xs text-muted-foreground">{item.role}</p>
-                </figcaption>
+              <figure className="card-premium flex h-full flex-col overflow-hidden">
+                <div className="aspect-[4/3] w-full overflow-hidden border-b border-border bg-secondary/30">
+                  {item.image ? (
+                    <img
+                      src={item.image}
+                      alt={`Feedback de ${item.name}`}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="grid h-full place-items-center">
+                      <Quote className="size-8 text-primary-glow/60" aria-hidden />
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  {item.quote && (
+                    <blockquote className="text-[0.95rem] leading-relaxed text-muted-foreground">
+                      “{item.quote}”
+                    </blockquote>
+                  )}
+                  <figcaption className="mt-auto pt-5">
+                    <p className="font-display text-base font-semibold">{item.name}</p>
+                    <p className="mt-0.5 text-xs tracking-wide text-primary-glow uppercase">
+                      {item.role}
+                    </p>
+                  </figcaption>
+                </div>
               </figure>
             </Reveal>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+export function Trust() {
+  return (
+    <section className="pb-4">
+      <div className="mx-auto max-w-6xl px-5">
+        <Reveal>
+          <div className="grid gap-4 rounded-3xl border border-border bg-surface/30 p-6 sm:grid-cols-3 sm:p-8">
+            {trustPoints.map((point) => (
+              <div key={point} className="flex items-start gap-3">
+                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-primary/15 text-primary-glow">
+                  <Check className="size-3.5" aria-hidden />
+                </span>
+                <p className="min-w-0 text-[0.95rem] leading-relaxed font-medium">{point}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -282,10 +455,11 @@ export function FinalCta() {
             />
             <div className="relative">
               <h2 className="mx-auto max-w-2xl font-display text-[1.75rem] leading-tight font-bold sm:text-4xl">
-                Seu negócio também merece uma presença digital profissional.
+                Seu próximo projeto pode começar hoje.
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground">
-                Vamos conversar e encontrar a melhor solução para o seu projeto.
+              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
+                Se você precisa de um site profissional ou de uma solução tecnológica para o seu
+                negócio, vamos conversar.
               </p>
               <CTALink
                 href={whatsappUrl}
@@ -296,11 +470,9 @@ export function FinalCta() {
                 className="mt-8 w-full sm:w-auto"
               >
                 <MessageCircle className="size-5" aria-hidden />
-                Falar com a LPweb.dev
+                Falar no WhatsApp
               </CTALink>
-              <p className="mt-4 text-sm text-muted-foreground">
-                Sem compromisso. Vamos conversar sobre sua ideia.
-              </p>
+              <p className="mt-4 text-sm text-muted-foreground">Orçamento sem compromisso.</p>
             </div>
           </div>
         </Reveal>
@@ -308,6 +480,8 @@ export function FinalCta() {
     </section>
   );
 }
+
+
 
 export function Contact() {
   return (
