@@ -480,44 +480,6 @@ export function FinalCta() {
 }
 
 
-export function FinalCta() {
-  return (
-    <section className="section-y">
-      <div className="mx-auto max-w-6xl px-5">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-gradient-surface px-6 py-14 text-center md:px-14 md:py-20">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -top-24 left-1/2 size-72 -translate-x-1/2 rounded-full bg-primary/25 blur-[110px]"
-            />
-            <div className="relative">
-              <h2 className="mx-auto max-w-2xl font-display text-[1.75rem] leading-tight font-bold sm:text-4xl">
-                Seu negócio também merece uma presença digital profissional.
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground">
-                Vamos conversar e encontrar a melhor solução para o seu projeto.
-              </p>
-              <CTALink
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="whatsapp"
-                size="lg"
-                className="mt-8 w-full sm:w-auto"
-              >
-                <MessageCircle className="size-5" aria-hidden />
-                Falar com a LPweb.dev
-              </CTALink>
-              <p className="mt-4 text-sm text-muted-foreground">
-                Sem compromisso. Vamos conversar sobre sua ideia.
-              </p>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
 
 export function Contact() {
   return (
