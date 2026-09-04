@@ -1,24 +1,77 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { Hero } from "@/components/sections/Hero";
+import {
+  About,
+  Audience,
+  Benefits,
+  Contact,
+  FinalCta,
+  Portfolio,
+  Process,
+  Services,
+  Testimonials,
+} from "@/components/sections/Sections";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "LPweb.dev — Sites profissionais, IA e automação para seu negócio";
+const description =
+  "Criação de sites, landing pages, inteligência artificial, automação e soluções para WhatsApp. Tecnologia para levar o seu negócio para o próximo nível.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfessionalService",
+          name: "LPweb.dev",
+          description,
+          slogan: "Tecnologia que simplifica negócios.",
+          areaServed: "BR",
+          serviceType: [
+            "Criação de sites",
+            "Landing pages",
+            "Inteligência Artificial",
+            "Automação",
+            "Soluções para WhatsApp",
+            "Soluções em TI",
+          ],
+        }),
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen">
+      <Header />
+      <main>
+        <Hero />
+        <About />
+        <Services />
+        <Audience />
+        <Portfolio />
+        <Process />
+        <Benefits />
+        <Testimonials />
+        <FinalCta />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }
