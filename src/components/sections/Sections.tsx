@@ -374,20 +374,43 @@ export function Testimonials() {
     <section className="section-y">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal>
-          <SectionHeading eyebrow="Feedback" title="Resultados que geram confiança." />
+          <SectionHeading
+            eyebrow="Feedback"
+            title="Resultados que geram confiança."
+            text="Depoimentos reais de quem já trabalhou com a LPweb.dev."
+          />
         </Reveal>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-4xl gap-5 sm:grid-cols-2">
           {testimonials.map((item, i) => (
             <Reveal key={item.name} delay={i * 80}>
-              <figure className="card-premium h-full p-6">
-                <Quote className="size-6 text-primary-glow" aria-hidden />
-                <blockquote className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  {item.quote ?? "Depoimento em breve."}
-                </blockquote>
-                <figcaption className="mt-5 border-t border-border pt-4">
-                  <p className="text-sm font-semibold">{item.name}</p>
-                  <p className="text-xs text-muted-foreground">{item.role}</p>
-                </figcaption>
+              <figure className="card-premium flex h-full flex-col overflow-hidden">
+                <div className="aspect-[4/3] w-full overflow-hidden border-b border-border bg-secondary/30">
+                  {item.image ? (
+                    <img
+                      src={item.image}
+                      alt={`Feedback de ${item.name}`}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="grid h-full place-items-center">
+                      <Quote className="size-8 text-primary-glow/60" aria-hidden />
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  {item.quote && (
+                    <blockquote className="text-[0.95rem] leading-relaxed text-muted-foreground">
+                      “{item.quote}”
+                    </blockquote>
+                  )}
+                  <figcaption className="mt-auto pt-5">
+                    <p className="font-display text-base font-semibold">{item.name}</p>
+                    <p className="mt-0.5 text-xs tracking-wide text-primary-glow uppercase">
+                      {item.role}
+                    </p>
+                  </figcaption>
+                </div>
               </figure>
             </Reveal>
           ))}
@@ -396,6 +419,66 @@ export function Testimonials() {
     </section>
   );
 }
+
+export function Trust() {
+  return (
+    <section className="pb-4">
+      <div className="mx-auto max-w-6xl px-5">
+        <Reveal>
+          <div className="grid gap-4 rounded-3xl border border-border bg-surface/30 p-6 sm:grid-cols-3 sm:p-8">
+            {trustPoints.map((point) => (
+              <div key={point} className="flex items-start gap-3">
+                <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-primary/15 text-primary-glow">
+                  <Check className="size-3.5" aria-hidden />
+                </span>
+                <p className="min-w-0 text-[0.95rem] leading-relaxed font-medium">{point}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+export function FinalCta() {
+  return (
+    <section className="section-y">
+      <div className="mx-auto max-w-6xl px-5">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-3xl border border-primary/30 bg-gradient-surface px-6 py-14 text-center md:px-14 md:py-20">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -top-24 left-1/2 size-72 -translate-x-1/2 rounded-full bg-primary/25 blur-[110px]"
+            />
+            <div className="relative">
+              <h2 className="mx-auto max-w-2xl font-display text-[1.75rem] leading-tight font-bold sm:text-4xl">
+                Seu próximo projeto pode começar hoje.
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground">
+                Se você precisa de um site profissional ou de uma solução tecnológica para o seu
+                negócio, vamos conversar.
+              </p>
+              <CTALink
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="whatsapp"
+                size="lg"
+                className="mt-8 w-full sm:w-auto"
+              >
+                <MessageCircle className="size-5" aria-hidden />
+                Falar no WhatsApp
+              </CTALink>
+              <p className="mt-4 text-sm text-muted-foreground">Orçamento sem compromisso.</p>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 
 export function FinalCta() {
   return (
