@@ -10,7 +10,9 @@ import {
   projects,
   services,
   testimonials,
+  trustPoints,
   whatsappUrl,
+
 } from "@/lib/site";
 
 function SectionHeading({
