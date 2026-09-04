@@ -1,6 +1,6 @@
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, Check, MessageCircle } from "lucide-react";
 import { CTALink } from "@/components/CTAButton";
-import { whatsappUrl } from "@/lib/site";
+import { heroServices, heroTagline, whatsappUrl } from "@/lib/site";
 import heroVisual from "@/assets/hero-visual.jpg";
 
 export function Hero() {
@@ -22,10 +22,25 @@ export function Hero() {
             </span>
           </h1>
 
-          <p className="mt-5 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="mt-5 max-w-lg text-[1.05rem] leading-relaxed font-medium text-foreground/90 sm:text-lg">
+            {heroTagline}
+          </p>
+
+          <p className="mt-3 max-w-lg text-base leading-relaxed text-muted-foreground">
             Criamos sites profissionais e soluções digitais para ajudar empresas e
             profissionais a crescerem no mundo digital.
           </p>
+
+          <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
+            {heroServices.map((item) => (
+              <li key={item} className="flex items-center gap-2.5 text-[0.95rem]">
+                <span className="grid size-5 shrink-0 place-items-center rounded-full bg-primary/15 text-primary-glow">
+                  <Check className="size-3" aria-hidden />
+                </span>
+                <span className="min-w-0">{item}</span>
+              </li>
+            ))}
+          </ul>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <CTALink
@@ -34,15 +49,20 @@ export function Hero() {
               rel="noopener noreferrer"
               variant="whatsapp"
               size="lg"
+              className="w-full sm:w-auto"
             >
               <MessageCircle className="size-5" aria-hidden />
               Falar no WhatsApp
             </CTALink>
-            <CTALink href="#servicos" variant="outline" size="lg">
+            <CTALink href="#servicos" variant="outline" size="lg" className="w-full sm:w-auto">
               Conhecer nossos serviços
               <ArrowRight className="size-4" aria-hidden />
             </CTALink>
           </div>
+
+          <p className="mt-4 text-sm text-muted-foreground">
+            Atendimento personalizado • Orçamento sem compromisso
+          </p>
         </div>
 
         <div className="relative">
