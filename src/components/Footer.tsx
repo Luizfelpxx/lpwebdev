@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Mail, MessageCircle } from "lucide-react";
 import { contact, whatsappUrl } from "@/lib/site";
+import logoAsset from "@/assets/logo-lpweb.jpg.asset.json";
+
 
 const footerLinks = [
   { label: "Início", hash: "inicio" },
@@ -15,9 +17,13 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-5 py-12">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="max-w-xs">
-            <p className="font-display text-lg font-bold">
-              LPweb<span className="text-primary-glow">.dev</span>
-            </p>
+            <img
+              src={logoAsset.url}
+              alt="LPweb.dev"
+              className="h-14 w-auto rounded-xl bg-surface-elevated/80 p-1 ring-2 ring-primary/30 shadow-glow md:h-16"
+              width={160}
+              height={160}
+            />
             <p className="mt-2 text-sm text-muted-foreground">
               Tecnologia que simplifica negócios.
             </p>

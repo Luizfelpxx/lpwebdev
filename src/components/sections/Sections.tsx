@@ -14,6 +14,8 @@ import {
   whatsappUrl,
 
 } from "@/lib/site";
+import logoAsset from "@/assets/logo-lpweb.jpg.asset.json";
+
 
 function SectionHeading({
   eyebrow,
@@ -454,6 +456,13 @@ export function FinalCta() {
               className="pointer-events-none absolute -top-24 left-1/2 size-72 -translate-x-1/2 rounded-full bg-primary/25 blur-[110px]"
             />
             <div className="relative">
+              <img
+                src={logoAsset.url}
+                alt="LPweb.dev"
+                className="mx-auto mb-6 h-28 w-auto rounded-2xl bg-surface-elevated/80 p-2 ring-2 ring-primary/30 shadow-glow md:h-32"
+                width={260}
+                height={260}
+              />
               <h2 className="mx-auto max-w-2xl font-display text-[1.75rem] leading-tight font-bold sm:text-4xl">
                 Seu próximo projeto pode começar hoje.
               </h2>

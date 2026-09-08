@@ -4,6 +4,8 @@ import { Menu, X, MessageCircle } from "lucide-react";
 import { CTALink } from "@/components/CTAButton";
 import { navItems, whatsappUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import logoAsset from "@/assets/logo-lpweb.jpg.asset.json";
+
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -31,8 +33,14 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-4 px-5 md:h-18">
-        <Link to="/" hash="inicio" className="min-w-0 font-display text-lg font-bold">
-          LPweb<span className="text-primary-glow">.dev</span>
+        <Link to="/" hash="inicio" className="flex min-w-0 items-center">
+          <img
+            src={logoAsset.url}
+            alt="LPweb.dev"
+            className="h-12 w-auto rounded-xl bg-surface-elevated/80 p-1 ring-2 ring-primary/30 shadow-glow md:h-14"
+            width={160}
+            height={160}
+          />
         </Link>
 
         <nav className="ml-auto hidden items-center gap-1 md:flex">
