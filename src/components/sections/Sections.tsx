@@ -459,9 +459,9 @@ export function FinalCta() {
               <img
                 src={logoAsset.url}
                 alt="LPweb.dev"
-                className="mx-auto mb-6 h-24 w-auto rounded-2xl ring-2 ring-primary/30 shadow-glow md:h-28"
-                width={240}
-                height={240}
+                className="mx-auto mb-6 h-28 w-auto rounded-2xl bg-surface-elevated/80 p-2 ring-2 ring-primary/30 shadow-glow md:h-32"
+                width={260}
+                height={260}
               />
               <h2 className="mx-auto max-w-2xl font-display text-[1.75rem] leading-tight font-bold sm:text-4xl">
                 Seu próximo projeto pode começar hoje.

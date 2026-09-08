@@ -20,7 +20,7 @@ export function Footer() {
             <img
               src={logoAsset.url}
               alt="LPweb.dev"
-              className="h-11 w-auto rounded-xl ring-2 ring-primary/30 shadow-glow md:h-14"
+              className="h-14 w-auto rounded-xl bg-surface-elevated/80 p-1 ring-2 ring-primary/30 shadow-glow md:h-16"
               width={160}
               height={160}
             />
