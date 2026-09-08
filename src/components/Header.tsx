@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X, MessageCircle } from "lucide-react";
 import { CTALink } from "@/components/CTAButton";
+import { Logo } from "@/components/Logo";
 import { navItems, whatsappUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
-import logoAsset from "@/assets/logo-lpweb.jpg.asset.json";
 
 
 export function Header() {

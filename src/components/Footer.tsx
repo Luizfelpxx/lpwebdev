@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Mail, MessageCircle } from "lucide-react";
+import { Logo } from "@/components/Logo";
 import { contact, whatsappUrl } from "@/lib/site";
-import logoAsset from "@/assets/logo-lpweb.jpg.asset.json";
 
 
 const footerLinks = [
