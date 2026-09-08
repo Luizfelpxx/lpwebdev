@@ -37,9 +37,9 @@ export function Header() {
           <img
             src={logoAsset.url}
             alt="LPweb.dev"
-            className="h-8 w-auto md:h-9"
-            width={144}
-            height={144}
+            className="h-10 w-auto md:h-12"
+            width={160}
+            height={160}
           />
         </Link>
 
